@@ -1,0 +1,9 @@
+SRCDATE = "20120824"
+
+require vuplus-dvb-modules.inc
+
+DOWNLOADMACHINE = "${MACHINE}"
+
+SRC_URI[md5sum] = "e25dcff10452462d5af8482685860282"
+SRC_URI[sha256sum] = "cc7f52c5c031a44d425e620184495d6f87dfd86b3a1c2940d3eaea7a84d740c3"
+

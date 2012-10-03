@@ -1,0 +1,24 @@
+diff --git a/lib/python/Plugins/SystemPlugins/Blindscan/plugin.py b/lib/python/Plugins/SystemPlugins/Blindscan/plugin.py
+index fb22f1e..013df5b 100644
+--- a/lib/python/Plugins/SystemPlugins/Blindscan/plugin.py
++++ b/lib/python/Plugins/SystemPlugins/Blindscan/plugin.py
+@@ -3,7 +3,6 @@
+ from Screens.Screen import Screen
+ from Screens.ServiceScan import ServiceScan
+ from Screens.MessageBox import MessageBox
+-from Screens.DefaultWizard import DefaultWizard
+ 
+ from Components.Label import Label
+ from Components.TuneTest import Tuner
+@@ -11,10 +10,7 @@
+ from Components.Sources.StaticText import StaticText
+ from Components.ActionMap import NumberActionMap, ActionMap
+ from Components.NimManager import nimmanager, getConfigSatlist
+-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigSlider, ConfigEnableDisable
+-
+-from Tools.HardwareInfo import HardwareInfo
+-from Tools.Directories import resolveFilename, SCOPE_DEFAULTPARTITIONMOUNTDIR, SCOPE_DEFAULTDIR, SCOPE_DEFAULTPARTITION
++from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry
+ 
+ from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBSatelliteEquipmentControl, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager, getDesktop
+ 
