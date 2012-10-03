@@ -10,7 +10,7 @@ inherit gitpkgv
 
 PV = "experimental-git${SRCPV}"
 PKGV = "experimental-git${GITPKGV}"
-PR = "r7"
+PR = "r8"
 
 SRC_URI="git://openpli.git.sourceforge.net/gitroot/openpli/plugins-enigma2;protocol=git \
 	file://enigma2_plugins_mytube_tpm.patch;patch=1;pnum=1 \
@@ -22,7 +22,7 @@ EXTRA_OECONF = " \
 	STAGING_INCDIR=${STAGING_INCDIR} \
 	STAGING_LIBDIR=${STAGING_LIBDIR} \
 	--without-debug \
-	${@base_contains("MACHINE_FEATURES", "tpm", "--with-tpm" , "", d)} \
+	--with-tpm \
 "
 
 CONFFILES_${PN} += "${sysconfdir}/enigma2/movietags"

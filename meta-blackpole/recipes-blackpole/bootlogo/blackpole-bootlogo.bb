@@ -1,7 +1,7 @@
-DESCRIPTION = "OpenPLi bootlogo"
+DESCRIPTION = "Black Pole bootlogo"
 SECTION = "base"
 PRIORITY = "required"
-MAINTAINER = "PLi team"
+MAINTAINER = "Black Pole team"
 
 require conf/license/blackpole-gplv2.inc
 
