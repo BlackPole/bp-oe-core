@@ -2,8 +2,15 @@ require conf/license/blackpole-gplv2.inc
 
 inherit task image
 
+
 IMAGE_INSTALL = " \
 	${ROOTFS_PKGMANAGE} \
+	base-files-doc \
+	mtd-utils \
+	mkfs-ubifs \
+	mkfs-jffs2 \
+	vuplus-compat \
+	usbtunerhelper \
 	3rd-party-feed-configs \
 	avahi-daemon \
 	cifs \
@@ -13,10 +20,10 @@ IMAGE_INSTALL = " \
 	e2fsprogs-mke2fs \
 	early-configure \
 	fakelocale \
-	nfs-utils-client \
+	nfs-utils \
 	blackpole-bootlogo \
 	opkg \
-	sambaserver \
+	samba \
 	sdparm \
 	task-base \
 	task-core-boot \
@@ -27,6 +34,11 @@ IMAGE_INSTALL = " \
 	volatile-media \
 	vsftpd \
 	mc \
+	minidlna \
+	djmount \
+	openvpn \
+	blackpole-base \
+	blackholesocker \
 	"
 
 OPTIONAL_PACKAGES ?= ""
@@ -34,7 +46,6 @@ OPTIONAL_PACKAGES += " \
 	autossh \
 	ctorrent \
 	cups \
-	djmount \
 	dvbsnoop \
 	dvdfs \
 	gdb \
@@ -43,21 +54,17 @@ OPTIONAL_PACKAGES += " \
 	inadyn-mt \
 	iperf \
 	joe \
-	minidlna \
 	mpd \
-	mtd-utils \
 	nano \
 	ntfs-3g \
 	ntp \
 	openresolv \
 	openssh \
-	openvpn \
 	parted \
 	procps \
 	pyload \
 	rsync \
 	sabnzbd \
-	samba \
 	sshpass \
 	smartmontools \
 	strace \

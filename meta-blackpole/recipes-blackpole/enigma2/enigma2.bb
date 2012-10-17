@@ -10,27 +10,13 @@ DEPENDS = " \
 	gst-plugins-base gstreamer \
 	hotplug-e2-helper \
 	jpeg \
-	libdreamdvd libdvbsi++ libfribidi libmad libpng libsigc++-1.2 libungif libxml2 libxmlccwrap \
+	libdreamdvd libdvbsi++ libfribidi libmad libpng libsigc++-1.2 libungif libxml2 libxmlccwrap librtmp \
 	openssl \
 	python python-imaging python-twisted python-wifi \
 	swig-native \
 	tuxtxt-enigma2 \
 	"
 
-RDEPENDS_${PN} = " \
-	alsa-conf \
-	enigma2-fonts \
-	enigma2-plugin-skins-pli-hd \
-	ethtool \
-	glibc-gconv-iso8859-15 \
-	gst-plugin-subsink \
-	\
-	${PYTHON_RDEPS} \
-	${GST_BASE_RDEPS} \
-	${GST_GOOD_RDEPS} \
-	${GST_BAD_RDEPS} \
-	${GST_UGLY_RDEPS} \
-	"
 PYTHON_RDEPS = " \
 	python-codecs \
 	python-core \
@@ -42,8 +28,10 @@ PYTHON_RDEPS = " \
 	python-pickle \
 	python-re \
 	python-shell \
+	python-stringold \
 	python-threading \
 	python-twisted-core \
+	python-twisted-protocols \
 	python-twisted-web \
 	python-utf8-hack \
 	python-xml \
@@ -87,6 +75,7 @@ GST_GOOD_RDEPS = " \
 
 GST_BAD_RDEPS = " \
 	gst-plugins-bad-cdxaparse \
+	gst-plugins-bad-fragmented \
 	gst-plugins-bad-mms \
 	gst-plugins-bad-mpegdemux \
 	gst-plugins-bad-rtmp \
@@ -103,6 +92,20 @@ GST_UGLY_RDEPS = " \
 	gst-plugins-ugly-mpegaudioparse \
 	gst-plugins-ugly-mpegstream \
 	"
+RDEPENDS_${PN} = " \
+	alsa-conf \
+	enigma2-fonts \
+	ethtool \
+	glibc-gconv-iso8859-15 \
+	gst-plugin-subsink \
+	\
+	${PYTHON_RDEPS} \
+	${GST_BASE_RDEPS} \
+	${GST_GOOD_RDEPS} \
+	${GST_BAD_RDEPS} \
+	${GST_UGLY_RDEPS} \
+	"
+
 
 # DVD playback is integrated, we need the libraries
 RDEPENDS_${PN} += "libdreamdvd"
@@ -111,7 +114,7 @@ RRECOMMENDS_${PN} = "libdvdcss"
 # We depend on the font which we use for TXT subtitles (defined in skin_subtitles.xml)
 RDEPENDS_${PN} += "font-valis-enigma"
 
-RDEPENDS_${PN} += "${@base_contains("MACHINE_FEATURES", "blindscan-dvbc", "virtual/blindscan-dvbc" , "", d)}"
+#RDEPENDS_${PN} += "${@base_contains("MACHINE_FEATURES", "blindscan-dvbc", "virtual/blindscan-dvbc" , "", d)}"
 
 DESCRIPTION_append_enigma2-plugin-extensions-cutlisteditor = "enables you to cut your movies."
 RDEPENDS_enigma2-plugin-extensions-cutlisteditor = "aio-grab"
@@ -135,6 +138,9 @@ RDEPENDS_enigma2-plugin-systemplugins-wirelesslan = "wpa-supplicant wireless-too
 DESCRIPTION_append_enigma2-plugin-systemplugins-networkwizard = "provides easy step by step network configuration"
 #RDEPENDS_enigma2-plugin-extensions-dvdburn = "dvd+rw-tools dvdauthor mjpegtools cdrkit python-imaging ${DEMUXTOOL}"
 RDEPENDS_enigma2-plugin-systemplugins-hotplug = "hotplug-e2-helper"
+RDEPENDS_enigma2-plugin-extensions-streamtv = "librtmp gst-plugins-bad-rtmp "
+RDEPENDS_enigma2-plugin-extensions-dlnabrowser = "djmount fuse-utils fuse libupnp"
+RDEPENDS_enigma2-plugin-extensions-dlnaserver = "minidlna libexif libav libgsm libmp3lame schroedinger libtheora liboil"
 
 inherit gitpkgv
 

@@ -32,6 +32,10 @@ do_install() {
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/RemoteControlCode
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/LEDBrightnessSetup
 	install -d  ${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/ZappingModeSelection
+	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/StreamTV
+	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/StreamTV/icons
+	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser
+	install -d  ${D}/usr/lib/enigma2/python/Plugins/Extensions/DLNAServer
 	
 	install -m 0644 ${S}/lib/python/Plugins/Extensions/VuplusEvent/*.py \
 	${S}/lib/python/Plugins/Extensions/VuplusEvent/*.so \
@@ -68,6 +72,24 @@ do_install() {
 	install -m 0644 ${S}/lib/python/Plugins/SystemPlugins/ZappingModeSelection/*.py \
 	${D}/usr/lib/enigma2/python/Plugins/SystemPlugins/ZappingModeSelection
 
+	install -m 0644 ${S}/lib/python/Plugins/Extensions/StreamTV/*.py \
+	${S}/lib/python/Plugins/Extensions/StreamTV/*.png \
+	${S}/lib/python/Plugins/Extensions/StreamTV/*.xml \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/StreamTV
+	install -m 0755 ${S}/lib/python/Plugins/Extensions/StreamTV/rtmpdump \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/StreamTV
+	install -m 0644 ${S}/lib/python/Plugins/Extensions/StreamTV/icons/*.png \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/StreamTV/icons
+
+	install -m 0644 ${S}/lib/python/Plugins/Extensions/DLNABrowser/*.py \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser
+
+	install -m 0644 ${S}/lib/python/Plugins/Extensions/DLNAServer/*.py \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/DLNAServer
+	install -m 0755 ${S}/lib/python/Plugins/Extensions/DLNAServer/dlnaserver \
+	${D}/usr/lib/enigma2/python/Plugins/Extensions/DLNAServer
+
+
 	python -O -m compileall ${D}/usr/lib/enigma2/python/Plugins/
 }
 
@@ -82,6 +104,9 @@ FILES_enigma2-plugin-systemplugins-firmwareupgrade = "/usr/lib/enigma2/python/Pl
 FILES_enigma2-plugin-systemplugins-remotecontrolcode = "/usr/lib/enigma2/python/Plugins/SystemPlugins/RemoteControlCode"
 FILES_enigma2-plugin-systemplugins-ledbrightnesssetup = "/usr/lib/enigma2/python/Plugins/SystemPlugins/LEDBrightnessSetup"
 FILES_enigma2-plugin-systemplugins-zappingmodeselection = "/usr/lib/enigma2/python/Plugins/SystemPlugins/ZappingModeSelection"
+FILES_enigma2-plugin-extensions-streamtv = "/usr/lib/enigma2/python/Plugins/Extensions/StreamTV"
+FILES_enigma2-plugin-extensions-dlnabrowser = "/usr/lib/enigma2/python/Plugins/Extensions/DLNABrowser"
+FILES_enigma2-plugin-extensions-dlnaserver = "/usr/lib/enigma2/python/Plugins/Extensions/DLNAServer"
 
 PACKAGES = "\
 	enigma2-plugin-extensions-vuplusevent \
@@ -95,6 +120,9 @@ PACKAGES = "\
 	enigma2-plugin-systemplugins-remotecontrolcode \
 	enigma2-plugin-systemplugins-ledbrightnesssetup \
 	enigma2-plugin-systemplugins-zappingmodeselection \
+	enigma2-plugin-extensions-streamtv \
+	enigma2-plugin-extensions-dlnabrowser \
+	enigma2-plugin-extensions-dlnaserver \
 	"
 
 PROVIDES="${PACKAGES}"

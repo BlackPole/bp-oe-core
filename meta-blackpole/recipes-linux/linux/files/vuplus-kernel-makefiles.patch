@@ -1,0 +1,204 @@
+diff --git a/drivers/media/common/tuners/Kconfig b/drivers/media/common/tuners/Kconfig
+index 996302a..c0c7de4 100644
+--- a/drivers/media/common/tuners/Kconfig
++++ b/drivers/media/common/tuners/Kconfig
+@@ -204,4 +204,11 @@ config MEDIA_TUNER_TDA18212
+ 	help
+ 	  NXP TDA18212 silicon tuner driver.
+ 
++config MEDIA_TUNER_TUA9001
++       tristate "Infineon OMNITUNE TUA 9001 silicon tuner"
++       depends on VIDEO_MEDIA && I2C
++       default m
++       help
++         A driver for the silicon tuner OMNITUNE TUA 9001 from Infineon.
++
+ endmenu
+diff --git a/drivers/media/common/tuners/Makefile b/drivers/media/common/tuners/Makefile
+index 20d24fc..34634fa 100644
+--- a/drivers/media/common/tuners/Makefile
++++ b/drivers/media/common/tuners/Makefile
+@@ -27,6 +27,7 @@ obj-$(CONFIG_MEDIA_TUNER_MC44S803) += mc44s803.o
+ obj-$(CONFIG_MEDIA_TUNER_MAX2165) += max2165.o
+ obj-$(CONFIG_MEDIA_TUNER_TDA18218) += tda18218.o
+ obj-$(CONFIG_MEDIA_TUNER_TDA18212) += tda18212.o
++obj-$(CONFIG_MEDIA_TUNER_TUA9001) += tua9001.o
+ 
+ EXTRA_CFLAGS += -Idrivers/media/dvb/dvb-core
+ EXTRA_CFLAGS += -Idrivers/media/dvb/frontends
+diff --git a/drivers/media/dvb/dvb-usb/Kconfig b/drivers/media/dvb/dvb-usb/Kconfig
+index 5d73dec..a9e7268 100644
+--- a/drivers/media/dvb/dvb-usb/Kconfig
++++ b/drivers/media/dvb/dvb-usb/Kconfig
+@@ -374,3 +374,30 @@ config DVB_USB_TECHNISAT_USB2
+ 	select DVB_STV6110x if !DVB_FE_CUSTOMISE
+ 	help
+ 	  Say Y here to support the Technisat USB2 DVB-S/S2 device
++
++config DVB_USB_A867
++	tristate "Avermedia A867 DVB receiver"
++	depends on DVB_USB
++	default m
++	help
++	  Choose Y or M here if you have an Avermedia A867 device
++	  To compile this driver as a module, choose M here
++
++config DVB_USB_AF9035
++       tristate "Afatech AF9035 DVB-T USB2.0 support"
++       depends on DVB_USB
++       default m
++       select DVB_AF9033
++       select MEDIA_TUNER_TUA9001  if !MEDIA_TUNER_CUSTOMISE
++       select MEDIA_TUNER_TDA18218 if !MEDIA_TUNER_CUSTOMISE
++       select MEDIA_TUNER_MXL5007T if !MEDIA_TUNER_CUSTOMISE
++       help
++         Say Y here to support the Afatech AF9035 based DVB-T USB2.0 receiver
++
++config DVB_USB_RTL2832
++       tristate "Realtek RTL2832 DVB-T USB2.0 support"
++       depends on DVB_USB
++       default m
++       help
++         Say Y or M to support the Realtek RTL2832 DVB-T receiver
++
+diff --git a/drivers/media/dvb/dvb-usb/Makefile b/drivers/media/dvb/dvb-usb/Makefile
+index 4bac13d..9531557 100644
+--- a/drivers/media/dvb/dvb-usb/Makefile
++++ b/drivers/media/dvb/dvb-usb/Makefile
+@@ -94,6 +94,27 @@ obj-$(CONFIG_DVB_USB_LME2510) += dvb-usb-lmedm04.o
+ dvb-usb-technisat-usb2-objs = technisat-usb2.o
+ obj-$(CONFIG_DVB_USB_TECHNISAT_USB2) += dvb-usb-technisat-usb2.o
+ 
++dvb-usb-a867-objs := a867_af903x-core.o a867_af903x-devices.o a867_af903x-drv.o \
++			a867_af903x-fe.o a867_af903x-tuner.o a867_cmd.o a867_standard.o \
++			a867_demodulator.o a867_demodulatorextend.o a867_usb2impl.o \
++			a867_user.o a867_mxl5007t.o a867_Maxlinear_MXL5007.o a867_Afa_AF9007.o
++obj-$(CONFIG_DVB_USB_A867) += dvb-usb-a867.o
++
++dvb-usb-af9035-objs = af9035.o
++obj-$(CONFIG_DVB_USB_AF9035) += dvb-usb-af9035.o
++
++dvb-usb-rtl2832-objs := demod_rtl2832.o dvbt_demod_base.o dvbt_nim_base.o foundation.o \
++                       math_mpi.o nim_rtl2832_mxl5007t.o nim_rtl2832_fc2580.o nim_rtl2832_mt2266.o \
++                       rtl2832u.o rtl2832u_fe.o rtl2832u_io.o tuner_mxl5007t.o tuner_fc2580.o \
++                       tuner_mt2266.o tuner_tua9001.o nim_rtl2832_tua9001.o tuner_fc0012.o \
++                       nim_rtl2832_fc0012.o demod_rtl2836.o dtmb_demod_base.o dtmb_nim_base.o \
++                       nim_rtl2836_fc2580.o nim_rtl2836_mxl5007t.o tuner_e4000.o nim_rtl2832_e4000.o \
++                       tuner_mt2063.o demod_rtl2840.o tuner_max3543.o nim_rtl2832_mt2063.o \
++                       nim_rtl2832_max3543.o nim_rtl2840_mt2063.o nim_rtl2840_max3543.o \
++                       qam_demod_base.o qam_nim_base.o tuner_tda18272.o nim_rtl2832_tda18272.o \
++                       rtl2832u_ioctl.o nim_rtl2832_fc0013.o tuner_fc0013.o
++obj-$(CONFIG_DVB_USB_RTL2832) += dvb-usb-rtl2832.o
++
+ EXTRA_CFLAGS += -Idrivers/media/dvb/dvb-core/ -Idrivers/media/dvb/frontends/
+ # due to tuner-xc3028
+ EXTRA_CFLAGS += -Idrivers/media/common/tuners
+diff --git a/drivers/media/dvb/dvb-usb/dvb-usb-ids.h b/drivers/media/dvb/dvb-usb/dvb-usb-ids.h
+index 2a79b8f..77612d8 100644
+--- a/drivers/media/dvb/dvb-usb/dvb-usb-ids.h
++++ b/drivers/media/dvb/dvb-usb/dvb-usb-ids.h
+@@ -323,4 +323,23 @@
+ #define USB_PID_TECHNISAT_USB2_HDCI_V2			0x0002
+ #define USB_PID_TECHNISAT_AIRSTAR_TELESTICK_2		0x0004
+ #define USB_PID_TECHNISAT_USB2_DVB_S2			0x0500
++#define USB_PID_AFATECH_AF9035_1000                    0x1000
++#define USB_PID_AFATECH_AF9035_1001                    0x1001
++#define USB_PID_AFATECH_AF9035_1002                    0x1002
++#define USB_PID_AFATECH_AF9035_1003                    0x1003
++#define USB_PID_AFATECH_AF9035_9035                    0x9035
++#define USB_PID_AVERMEDIA_A333_A                       0xa333
++#define USB_PID_AVERMEDIA_A333_B                       0xb867
++#define USB_PID_AVERMEDIA_A867_A                       0x1867
++#define USB_PID_AVERMEDIA_A867_B                       0x0337
++#define USB_PID_AVERMEDIA_A867_C                       0xa867
++#define USB_PID_AVERMEDIA_A867_D                       0x0867
++#define USB_PID_AVERMEDIA_A867_E                       0xF337
++#define USB_PID_AVERMEDIA_A825                         0x0825
++#define USB_PID_AVERMEDIA_A835                         0xa835
++#define USB_PID_AVERMEDIA_B835                         0xb835
++#define USB_PID_TERRATEC_CINERGY_T_STICK               0x0093
++#define USB_PID_TERRATEC_CINERGY_T_STICK_2             0x00aa
++#define USB_PID_WINFAST_DTV_DONGLE_MINI                0x6a03
++
+ #endif
+diff --git a/drivers/media/dvb/frontends/Kconfig b/drivers/media/dvb/frontends/Kconfig
+index 32e08e3..a257651 100644
+--- a/drivers/media/dvb/frontends/Kconfig
++++ b/drivers/media/dvb/frontends/Kconfig
+@@ -411,6 +411,13 @@ config DVB_CXD2820R
+ 	help
+ 	  Say Y when you want to support this frontend.
+ 
++config DVB_AF9033
++       tristate "Afatech AF9033 demodulator"
++       depends on DVB_CORE && I2C
++       default m
++       help
++         Say Y when you want to support this frontend.
++
+ comment "DVB-C (cable) frontends"
+ 	depends on DVB_CORE
+ 
+diff --git a/drivers/media/dvb/frontends/Makefile b/drivers/media/dvb/frontends/Makefile
+index 6a6ba05..352e9ff 100644
+--- a/drivers/media/dvb/frontends/Makefile
++++ b/drivers/media/dvb/frontends/Makefile
+@@ -91,4 +91,4 @@ obj-$(CONFIG_DVB_STV0367) += stv0367.o
+ obj-$(CONFIG_DVB_CXD2820R) += cxd2820r.o
+ obj-$(CONFIG_DVB_DRXK) += drxk.o
+ obj-$(CONFIG_DVB_TDA18271C2DD) += tda18271c2dd.o
+-
++obj-$(CONFIG_DVB_AF9033) += af9033.o
+diff --git a/drivers/staging/Kconfig b/drivers/staging/Kconfig
+index 06c9081..c29d345 100644
+--- a/drivers/staging/Kconfig
++++ b/drivers/staging/Kconfig
+@@ -24,6 +24,8 @@ menuconfig STAGING
+ 
+ if STAGING
+ 
++source "drivers/staging/as102/Kconfig"
++
+ source "drivers/staging/et131x/Kconfig"
+ 
+ source "drivers/staging/slicoss/Kconfig"
+diff --git a/drivers/staging/Makefile b/drivers/staging/Makefile
+index f3c5e33..cda7919 100644
+--- a/drivers/staging/Makefile
++++ b/drivers/staging/Makefile
+@@ -3,6 +3,7 @@
+ # fix for build system bug...
+ obj-$(CONFIG_STAGING)		+= staging.o
+ 
++obj-$(CONFIG_DVB_AS102)		+= as102/
+ obj-$(CONFIG_ET131X)		+= et131x/
+ obj-$(CONFIG_SLICOSS)		+= slicoss/
+ obj-$(CONFIG_VIDEO_GO7007)	+= go7007/
+diff --git a/drivers/staging/as102/Kconfig b/drivers/staging/as102/Kconfig
+new file mode 100644
+index 0000000..b3902a9
+--- /dev/null
++++ b/drivers/staging/as102/Kconfig
+@@ -0,0 +1,9 @@
++config DVB_AS102
++       tristate "Abilis AS102 DVB receiver"
++       depends on DVB_CORE && USB && I2C && INPUT
++       select FW_LOADER
++       help
++         Choose Y or M here if you have a device containing an AS102
++
++         To compile this driver as a module, choose M here
++
+diff --git a/drivers/staging/as102/Makefile b/drivers/staging/as102/Makefile
+new file mode 100644
+index 0000000..e6f47fe
+--- /dev/null
++++ b/drivers/staging/as102/Makefile
+@@ -0,0 +1,7 @@
++dvb-as102-objs := as102_drv.o as102_fw.o as10x_cmd.o as10x_cmd_stream.o \
++               as102_fe.o as102_usb_drv.o as10x_cmd_cfg.o
++
++obj-$(CONFIG_DVB_AS102) += dvb-as102.o
++
++EXTRA_CFLAGS += -Idrivers/media/dvb/dvb-core
++

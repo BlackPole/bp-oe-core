@@ -15,7 +15,8 @@ SRC_URI = "cvs://anonymous@minidlna.cvs.sourceforge.net/cvsroot/minidlna;module=
 
 S = "${WORKDIR}/${PN}"
 
-inherit autotools gettext update-rc.d
+inherit autotools gettext 
+#update-rc.d
 
 PACKAGES =+ "${PN}-utils"
 
@@ -27,7 +28,7 @@ INITSCRIPT_NAME = "minidlna"
 
 do_install_append() {
 	install -d ${D}${sysconfdir}
-	install -m 644 minidlna.conf ${D}${sysconfdir}
+	install -m 644 ${WORKDIR}/minidlna.conf ${D}${sysconfdir}
 	install -d ${D}${sysconfdir}/init.d/
 	install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/${PN}
 }

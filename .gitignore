@@ -1,7 +1,6 @@
 /build-*
 /.deps/
 /meta-*/
-!/meta-openpli/
 !/meta-blackpole/
 /openembedded-core/
 /sources/
