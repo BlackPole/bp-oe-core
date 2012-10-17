@@ -93,6 +93,7 @@ DEPENDS += " \
 	enigma2-plugins \
 	"
 
+
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
 	enigma2-plugin-drivers-usbserial \
@@ -105,7 +106,6 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugins \
 	picons-enigma2-meta \
 	task-openplugins \
-	dvb-usb-drivers-meta \
 	"
 
 IMAGE_INSTALL += " \
