@@ -15,6 +15,7 @@ do_install () {
 	ln -s /usr/bin ${D}/var/
 	ln -s /etc ${D}/var/
 	ln -s /etc/cron ${D}/var/spool/
+	ln -s /etc/tuxbox ${D}/var/
 	ln -s /etc/tuxbox/scce ${D}/var/
 }
 
