@@ -19,6 +19,8 @@ inherit update-rc.d
 
 
 SRC_URI = "file://bootlogo.mvi file://backdrop.mvi file://bootlogo_wait.mvi file://switchoff.mvi file://bootlogo.sh"
+SRC_URI_append_vuuno = " file://splash_cfe_auto.bin"
+SRC_URI_append_vuultimo = " file://splash_cfe_auto.bin"
 
 
 BINARY_VERSION = "1"
@@ -35,6 +37,30 @@ do_install() {
 		install -m 0755 ${S}/$i.mvi ${D}/usr/share/$i.mvi;
 		ln -sf /usr/share/$i.mvi ${D}/boot/$i.mvi;
 	done;
+	install -d ${D}/${sysconfdir}/init.d
+	install -m 0755 ${S}/bootlogo.sh ${D}/${sysconfdir}/init.d/bootlogo
+}
+
+do_install_vuuno() {
+	install -d ${D}/boot
+	install -d ${D}/usr/share
+	for i in ${MVI}; do
+		install -m 0755 ${S}/$i.mvi ${D}/usr/share/$i.mvi;
+		ln -sf /usr/share/$i.mvi ${D}/boot/$i.mvi;
+	done;
+	install -m 0755 ${S}/splash_cfe_auto.bin ${D}/boot/splash_cfe_auto.bin
+	install -d ${D}/${sysconfdir}/init.d
+	install -m 0755 ${S}/bootlogo.sh ${D}/${sysconfdir}/init.d/bootlogo
+}
+
+do_install_vuultimo() {
+	install -d ${D}/boot
+	install -d ${D}/usr/share
+	for i in ${MVI}; do
+		install -m 0755 ${S}/$i.mvi ${D}/usr/share/$i.mvi;
+		ln -sf /usr/share/$i.mvi ${D}/boot/$i.mvi;
+	done;
+	install -m 0755 ${S}/splash_cfe_auto.bin ${D}/boot/splash_cfe_auto.bin
 	install -d ${D}/${sysconfdir}/init.d
 	install -m 0755 ${S}/bootlogo.sh ${D}/${sysconfdir}/init.d/bootlogo
 }
