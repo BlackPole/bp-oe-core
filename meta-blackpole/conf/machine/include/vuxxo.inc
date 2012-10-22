@@ -38,23 +38,25 @@ IMAGE_CMD_ubi_prepend = " \
         mkfs.jffs2 --root=${IMAGE_ROOTFS}/boot --faketime \
         --disable-compressor=lzo --compression-mode=size \
         --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
-        ${EXTRA_IMAGECMD_COMPAT}; rm -rf ${IMAGE_ROOTFS}/boot/*; \
+        ${EXTRA_IMAGECMD_COMPAT}; \
         "
 
 IMAGE_CMD_ubi_prepend_vuuno = " \
 	cp ${IMAGE_ROOTFS}/boot/splash_cfe_auto.bin ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.splash_cfe_auto.bin; \
+	rm -f ${IMAGE_ROOTFS}/boot/splash_cfe_auto.bin; \
         mkfs.jffs2 --root=${IMAGE_ROOTFS}/boot --faketime \
         --disable-compressor=lzo --compression-mode=size \
         --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
-        ${EXTRA_IMAGECMD_COMPAT}; rm -rf ${IMAGE_ROOTFS}/boot/*; \
+        ${EXTRA_IMAGECMD_COMPAT}; \
         "
 
 IMAGE_CMD_ubi_prepend_vuultimo = " \
 	cp ${IMAGE_ROOTFS}/boot/splash_cfe_auto.bin ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.splash_cfe_auto.bin; \
+	rm -f ${IMAGE_ROOTFS}/boot/splash_cfe_auto.bin; \
         mkfs.jffs2 --root=${IMAGE_ROOTFS}/boot --faketime \
         --disable-compressor=lzo --compression-mode=size \
         --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
-        ${EXTRA_IMAGECMD_COMPAT}; rm -rf ${IMAGE_ROOTFS}/boot/*; \
+        ${EXTRA_IMAGECMD_COMPAT};  \
         "
 
 
@@ -72,7 +74,7 @@ IMAGE_CMD_ubi_append_vuuno = " \
         cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${DEPLOY_DIR_IMAGE}/vuplus/${UPDATE_DIR}/root_cfe_auto.jffs2; \
         cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 ${DEPLOY_DIR_IMAGE}/vuplus/${UPDATE_DIR}/boot_cfe_auto.jffs2; \
         gzip -f -9c ${DEPLOY_DIR_IMAGE}/vmlinux-${MACHINE}.bin > ${DEPLOY_DIR_IMAGE}/vuplus/${UPDATE_DIR}/kernel_cfe_auto.bin; \
-	cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.splash_cfe_auto.bin ${DEPLOY_DIR_IMAGE}/vuplus/ultimo/splash_cfe_auto.bin; \
+	cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.splash_cfe_auto.bin ${DEPLOY_DIR_IMAGE}/vuplus/uno/splash_cfe_auto.bin; \
         cd ${DEPLOY_DIR_IMAGE}; \
         zip ${IMAGE_NAME}_usb.zip vuplus/${UPDATE_DIR}/*; \
         rm -rf vuplus; \

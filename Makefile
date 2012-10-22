@@ -4,7 +4,7 @@
 MACHINE ?= ${subst /,,${subst build-,,${firstword ${dir ${wildcard build-*/}}}}}
 
 ifeq "$(MACHINE)" ""
-	MACHINE=vuultimo
+	MACHINE=vusolo
 endif
 
 # Adjust according to the number CPU cores to use for parallel build.

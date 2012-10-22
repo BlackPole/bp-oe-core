@@ -96,7 +96,6 @@ DEPENDS += " \
 
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
-	enigma2-plugin-drivers-usbserial \
 	enigma2-plugin-extensions-ambx \
 	enigma2-plugin-extensions-openuitzendinggemist \
 	enigma2-plugin-extensions-tuxcom \
@@ -114,6 +113,7 @@ IMAGE_INSTALL += " \
 	libavahi-client \
 	settings-autorestore \
 	tuxbox-common \
+	enigma2-plugin-drivers-usbserial \
 	${ENIGMA2_PLUGINS} \
 	${EXTRA_IMAGEDEPENDS} \
 	${WIFI_DRIVERS} \
