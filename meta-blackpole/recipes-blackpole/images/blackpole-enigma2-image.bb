@@ -74,15 +74,15 @@ ENIGMA2_PLUGINS_append_bm750 = " \
 	enigma2-plugin-systemplugins-fancontrol \
 "
 ENIGMA2_PLUGINS_append_vuuno = " \
+	enigma2-plugin-systemplugins-satscan \
 	enigma2-plugin-systemplugins-fpgaupgrade \
-	enigma2-plugin-systemplugins-blindscan \
 	enigma2-plugin-systemplugins-manualfancontrol \
 	enigma2-plugin-systemplugins-remotecontrolcode \
 "
 ENIGMA2_PLUGINS_append_vuultimo = " \
+	enigma2-plugin-systemplugins-satscan \
 	vuplus-enigma2-vfdskin \
 	enigma2-plugin-systemplugins-firmwareupgrade \
-	enigma2-plugin-systemplugins-blindscan \
 	enigma2-plugin-systemplugins-manualfancontrol \
 	enigma2-plugin-systemplugins-remotecontrolcode \
 	enigma2-plugin-systemplugins-ledbrightnesssetup \
