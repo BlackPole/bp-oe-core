@@ -96,8 +96,6 @@ DEPENDS += " \
 
 ENIGMA2_OPTIONAL = " \
 	channelsettings-enigma2-meta \
-	enigma2-plugin-extensions-ambx \
-	enigma2-plugin-extensions-openuitzendinggemist \
 	enigma2-plugin-extensions-tuxcom \
 	enigma2-plugin-extensions-tuxterm \
 	enigma2-plugin-extensions-xmltvimport \
