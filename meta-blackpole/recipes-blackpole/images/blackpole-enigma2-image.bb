@@ -118,8 +118,13 @@ IMAGE_INSTALL += " \
 	${BP_DVB_USB_DRIVERS} \
 	"
 
+OPTIONAL_RECIPES = " \
+	pcsc-lite \
+	"
+
 OPTIONAL_PACKAGES += " \
 	${ENIGMA2_OPTIONAL} \
+	${OPTIONAL_RECIPES} \
 	"
 
 export IMAGE_BASENAME = "blackpole-enigma2"
